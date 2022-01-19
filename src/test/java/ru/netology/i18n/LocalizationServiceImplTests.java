@@ -11,28 +11,28 @@ import ru.netology.entity.Location;
 import ru.netology.geo.GeoService;
 import ru.netology.geo.GeoServiceImpl;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class LocalizationServiceImplTests {
 
     @Test
     public void testLocaleRussia() {
-        LocalizationServiceImpl localization = Mockito.mock(LocalizationServiceImpl.class);
-        Mockito.when(localization.locale(Country.RUSSIA)).thenReturn("Добро пожаловать");
-
-        Assertions.assertEquals(
-                "Добро пожаловать",
-                localization.locale(Country.RUSSIA));
+        LocalizationService local =  new LocalizationServiceImpl();
+        String expected = local.locale(Country.RUSSIA);
+        //act
+        String result = "Добро пожаловать";
+        //assert
+        assertEquals(expected, result);
     }
 
     @ParameterizedTest
     @EnumSource(value = Country.class, names = {"USA", "BRAZIL", "GERMANY"})
     public void testLocaleForWelcome(Country country) {
-        LocalizationServiceImpl localization = Mockito.mock(LocalizationServiceImpl.class);
-        Mockito.when(localization.locale(country)).thenReturn("Welcome");
-
-        Assertions.assertEquals(
-                "Welcome",
-                localization.locale(country));
+        LocalizationService local = new LocalizationServiceImpl();
+        String expected = local.locale(country);
+        //act
+        String result = "Welcome";
+        //assert
+        assertEquals(expected, result);
     }
-
-
 }
